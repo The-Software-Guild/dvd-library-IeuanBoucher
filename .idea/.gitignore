@@ -3,6 +3,8 @@
 
 .idea/
 
+.gitignore
+
 # Log file
 *.log
 
