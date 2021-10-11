@@ -31,6 +31,7 @@ public class DvdLibraryController {
                break;
             case 3:
                io.printMessage("Edit DVD");
+               editDvd();
                break;
             case 4:
                viewAllDvds();
@@ -50,6 +51,14 @@ public class DvdLibraryController {
                break;
          }
       }
+   }
+
+   private void editDvd() {
+      view.displayEditDvdBanner();
+      String selectedDvdTitle = view.getSelectedDvdTitle();
+      Dvd selectedDvd = dao.getDvd(selectedDvdTitle);
+
+      dao.editDvd(selectedDvd);
    }
 
    private void viewDvd() {

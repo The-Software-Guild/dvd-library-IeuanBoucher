@@ -14,4 +14,6 @@ public interface DvdLibraryDao {
    boolean removeDvd(String selectedDvdTitle);
 
    Dvd getDvd(String selectedDvdTitle);
+
+   void editDvd(Dvd selectedDvd);
 }

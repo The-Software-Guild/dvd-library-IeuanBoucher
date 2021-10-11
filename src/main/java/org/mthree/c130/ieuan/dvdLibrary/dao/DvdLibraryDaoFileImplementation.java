@@ -54,19 +54,30 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
 
          currentDvd = unmarshallDvd(currentFileLine);
 
-         dvdMap.put(currentDvd.getTitle(), currentDvd);
+         if (currentDvd == null) {
+            System.out.println("Found malformed DVD, skipping");
+         } else {
+            dvdMap.put(currentDvd.getTitle(), currentDvd);
+         }
+
       }
    }
 
    private Dvd unmarshallDvd(String marshalledDvd) {
       String[] dataValue = marshalledDvd.split(DELIMITER);
+      Dvd dvd;
+      try {
 
-      Dvd dvd = new Dvd(dataValue[0]);
+         dvd = new Dvd(dataValue[0]);
 
-      dvd.setReleaseDate(dataValue[1]);
-      dvd.setMpaaRating(dataValue[2]);
-      dvd.setDirectorName(dataValue[3]);
-      dvd.setStudio(dataValue[4]);
+         dvd.setReleaseDate(dataValue[1]);
+         dvd.setMpaaRating(dataValue[2]);
+         dvd.setDirectorName(dataValue[3]);
+         dvd.setStudio(dataValue[4]);
+         dvd.setUserComment(dataValue[5]);
+      } catch (Exception e) {
+         return null;
+      }
 
       return dvd;
    }
@@ -81,7 +92,9 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
               DELIMITER +
               dvd.getDirectorName() +
               DELIMITER +
-              dvd.getStudio();
+              dvd.getStudio()
+              + DELIMITER +
+              dvd.getUserComment();
 
       return marshalledDvd;
 
@@ -106,5 +119,10 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
    @Override
    public Dvd getDvd(String selectedDvdTitle) {
       return dvdMap.get(selectedDvdTitle);
+   }
+
+   @Override
+   public void editDvd(Dvd selectedDvd) {
+
    }
 }

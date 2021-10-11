@@ -43,6 +43,9 @@ public class DvdLibraryView {
       temp = userIO.readString("Enter studio");
       newDvd.setStudio(temp);
 
+      temp = userIO.readString("Enter rating / note");
+      newDvd.setUserComment(temp);
+
       return newDvd;
    }
 
@@ -60,7 +63,8 @@ public class DvdLibraryView {
                       dvd.getReleaseDate() + "\n" +
                       dvd.getMpaaRating() + "\n" +
                       dvd.getDirectorName() + "\n" +
-                      dvd.getStudio() + "\n\n";
+                      dvd.getStudio() + "\n" +
+                      dvd.getUserComment() + "\n\n";
       System.out.println(output);
    }
 
@@ -80,5 +84,9 @@ public class DvdLibraryView {
 
    public void displayViewDvdMenu() {
       System.out.println("## View DVD menu ##");
+   }
+
+   public void displayEditDvdBanner() {
+      System.out.println("## Edit DVD menu ##");
    }
 }

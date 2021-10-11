@@ -6,6 +6,15 @@ public class Dvd {
    private String MpaaRating;
    private String directorName;
    private String studio;
+   private String userComment;
+
+   public void setTitle(String title) {
+      this.title = title;
+   }
+
+   public String getTitle() {
+      return title;
+   }
 
    public Dvd(String title) {
       this.title = title;
@@ -49,11 +58,5 @@ public class Dvd {
 
    public void setUserComment(String userComment) {
       this.userComment = userComment;
-   }
-
-   private String userComment;
-
-   public String getTitle() {
-      return title;
    }
 }
