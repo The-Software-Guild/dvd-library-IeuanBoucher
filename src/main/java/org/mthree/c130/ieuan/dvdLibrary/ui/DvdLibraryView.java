@@ -6,7 +6,11 @@ import java.util.Collection;
 
 public class DvdLibraryView {
 
-   private UserIO userIO = new UserIOConsoleImplementation();
+   public DvdLibraryView(UserIO userIO) {
+      this.userIO = userIO;
+   }
+
+   private final UserIO userIO;
 
    public int printMenuAndGetChoice() {
       userIO.printMessage("DVD Library main menu");
@@ -21,7 +25,7 @@ public class DvdLibraryView {
       return userIO.readInt("Choose an option from the menu.", 1, 7);
    }
 
-   public void displayCreateDvdBanner() {
+   public void displayCreateDvdTitle() {
       userIO.printMessage("## Create student menu ##");
    }
 
@@ -49,11 +53,11 @@ public class DvdLibraryView {
       return newDvd;
    }
 
-   public void displayCreateDvdSuccessBanner() {
+   public void displayCreateDvdSuccessTitle() {
       userIO.printMessage("Successfully created new DVD!");
    }
 
-   public void printViewDvdsBanner() {
+   public void printViewDvdsTitle() {
       userIO.printMessage("## View all DVDs menu ##");
    }
 
@@ -74,7 +78,7 @@ public class DvdLibraryView {
       }
    }
 
-   public void displayRemoveDvdBanner() {
+   public void displayRemoveDvdTitle() {
       System.out.println("## Remove DVD menu ##");
    }
 
@@ -86,7 +90,15 @@ public class DvdLibraryView {
       System.out.println("## View DVD menu ##");
    }
 
-   public void displayEditDvdBanner() {
+   public void displayEditDvdTitle() {
       System.out.println("## Edit DVD menu ##");
+   }
+
+   public void displayProgramExitTitle() {
+      System.out.println("Exiting program");
+   }
+
+   public void displayUnkownCommandMessage() {
+      System.out.println("Unknown option");
    }
 }
