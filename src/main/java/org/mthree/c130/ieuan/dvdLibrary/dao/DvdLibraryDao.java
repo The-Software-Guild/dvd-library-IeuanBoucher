@@ -16,4 +16,6 @@ public interface DvdLibraryDao {
    Dvd getDvd(String selectedDvdTitle);
 
    void editDvd(Dvd selectedDvd);
+
+   void loadData() throws FileNotFoundException;
 }

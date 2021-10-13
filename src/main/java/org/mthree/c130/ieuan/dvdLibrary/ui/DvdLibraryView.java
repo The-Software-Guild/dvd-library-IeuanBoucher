@@ -19,8 +19,7 @@ public class DvdLibraryView {
       userIO.printMessage("3. edit an existing DVD in the collection");
       userIO.printMessage("4. list all DVDs in the collection");
       userIO.printMessage("5. view specific DVD");
-      userIO.printMessage("6. check for a DVD in the collection");
-      userIO.printMessage("7. exit program");
+      userIO.printMessage("6. exit program");
 
       return userIO.readInt("Choose an option from the menu.", 1, 7);
    }
@@ -51,6 +50,28 @@ public class DvdLibraryView {
       newDvd.setUserComment(temp);
 
       return newDvd;
+   }
+
+   public Dvd editDvd(String title) {
+      Dvd updatedDvd = new Dvd(title);
+      String temp;
+
+      temp = userIO.readString("Enter release date");
+      updatedDvd.setReleaseDate(temp);
+
+      temp = userIO.readString("Enter MPAA rating");
+      updatedDvd.setMpaaRating(temp);
+
+      temp = userIO.readString("Enter Director name");
+      updatedDvd.setDirectorName(temp);
+
+      temp = userIO.readString("Enter studio");
+      updatedDvd.setStudio(temp);
+
+      temp = userIO.readString("Enter rating / note");
+      updatedDvd.setUserComment(temp);
+
+      return updatedDvd;
    }
 
    public void displayCreateDvdSuccessTitle() {

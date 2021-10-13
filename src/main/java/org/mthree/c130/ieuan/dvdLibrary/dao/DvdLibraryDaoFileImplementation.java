@@ -20,6 +20,11 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
       writeDvdLibrary();
    }
 
+   @Override
+   public void loadData() throws FileNotFoundException {
+      loadDvdLibrary();
+   }
+
    private void writeDvdLibrary() throws IOException {
       PrintWriter out;
       try {
@@ -67,9 +72,7 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
       String[] dataValue = marshalledDvd.split(DELIMITER);
       Dvd dvd;
       try {
-
          dvd = new Dvd(dataValue[0]);
-
          dvd.setReleaseDate(dataValue[1]);
          dvd.setMpaaRating(dataValue[2]);
          dvd.setDirectorName(dataValue[3]);
@@ -100,6 +103,7 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
 
    }
 
+   @Override
    public Collection<Dvd> getAllDvds() {
       try {
          loadDvdLibrary();
@@ -112,7 +116,11 @@ public class DvdLibraryDaoFileImplementation implements DvdLibraryDao {
    @Override
    public boolean removeDvd(String selectedDvdTitle) {
       Dvd removedDvd = dvdMap.remove(selectedDvdTitle);
-
+      try {
+         writeDvdLibrary();
+      } catch (IOException e) {
+         return false;
+      }
       return removedDvd != null;
    }
 

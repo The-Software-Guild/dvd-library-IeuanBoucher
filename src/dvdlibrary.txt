@@ -1,3 +1,4 @@
-Jaws//30/03/1990//U//Example Directot//US//UserNote
+Jaws//30/03/1990//U//Example Director//US//UserNote
+Jaws3//27/03/1992//U//Example//US//It was okay
 Title//01/03/2000//Rating//DirectorName//Studio//UserNote
-Jaws2//33//A//E//E//E
+Jaws2//22/03/1991//U//Example//US//Better than the third one

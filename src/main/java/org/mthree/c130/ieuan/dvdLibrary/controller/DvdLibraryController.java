@@ -4,6 +4,7 @@ import org.mthree.c130.ieuan.dvdLibrary.dao.DvdLibraryDao;
 import org.mthree.c130.ieuan.dvdLibrary.dto.Dvd;
 import org.mthree.c130.ieuan.dvdLibrary.ui.DvdLibraryView;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -18,6 +19,13 @@ public class DvdLibraryController {
    }
 
    public void runProgram() {
+      try {
+         dao.loadData();
+      } catch (FileNotFoundException e) {
+         System.out.println("Could not load DVD library from file");
+         return;
+      }
+
       int chosenOption;
       boolean continueLoop = true;
       while (continueLoop) {
@@ -63,7 +71,16 @@ public class DvdLibraryController {
       String selectedDvdTitle = view.getSelectedDvdTitle();
       Dvd selectedDvd = dao.getDvd(selectedDvdTitle);
 
-      dao.editDvd(selectedDvd);
+      if (selectedDvd == null) {
+         System.out.println("Could not find a DVD with that title.");
+      } else {
+         selectedDvd = view.editDvd(selectedDvdTitle);
+         try {
+            dao.addDvd(selectedDvd);
+         } catch (IOException e) {
+            System.out.println("Could not save edited DVD details");
+         }
+      }
    }
 
    private void viewDvd() {
@@ -78,9 +95,20 @@ public class DvdLibraryController {
       }
    }
 
+   private Dvd findDvd(String title) {
+      String selectedDvdTitle = view.getSelectedDvdTitle();
+
+      return dao.getDvd(selectedDvdTitle);
+   }
+
    private void createDvd() {
       view.displayCreateDvdTitle();
       Dvd newDvd = view.createNewDvdFromUser();
+
+      if (dao.getDvd(newDvd.getTitle()) != null) {
+         System.out.println("A DVD with that title already exists. To alter the details of that DVD , use the edit dvd menu");
+         return;
+      }
 
       try {
          dao.addDvd(newDvd);
